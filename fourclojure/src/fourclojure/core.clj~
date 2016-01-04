@@ -1,0 +1,39 @@
+(ns fourclojure.core)
+
+(defn last-element
+  [param]
+  (if (empty? param) 
+    nil 
+    (if (= (rest param) '())
+      (first param)
+      (last-element (rest param)))))
+
+(= (last-element [1 2 3 4 5]) 5)
+
+(defn count-a-sequence
+  [param]
+  (if (= '() param)
+    0
+    (+ 1 (count-a-sequence (rest param)))))
+
+(count-a-sequence "This is a string")
+
+(defn reverse-a-sequence
+  [param]
+  (if (empty? param) 
+    '()
+    (into (list (first param)) (rest param))))
+
+(reverse-a-sequence [])
+
+(defn fibonacci-sequence
+  [n]
+  (if (= n 0)
+    '(1)
+    (if (= n 1)
+      '(1 1)
+      (conj (vec (fibonacci-sequence (- n 1)))
+            (+ (last (fibonacci-sequence (- n 1))) (last (fibonacci-sequence (- n 2))))))))
+
+
+(fibonacci-sequence 5)
